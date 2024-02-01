@@ -3,27 +3,38 @@
 // Note: It's an in-place rotation. The output should be as if the array is rotated to the left by D elements in a single operation.
 #include <iostream>
 using namespace std;
-void rotateArrD(int arr[], int d, int n)
+void reverse(int nums[], int low, int high)
 {
-    int count = d;
-    while (count > 0)
+    while (low < high)
     {
-        int temp = arr[0];
-        for (int i = 1; i < n; i++)
-        {
-            arr[i - 1] = arr[i];
-        }
-        arr[n - 1] = temp;
-        count--;
+        nums[low] = nums[low] ^ nums[high];
+        nums[high] = nums[low] ^ nums[high];
+        nums[low] = nums[low] ^ nums[high];
+
+        low++;
+        high--;
     }
 }
+
+void rotate(int *nums, int numsSize, int k)
+{
+    reverse(nums, 0, numsSize - 1); // Reverse the entire array
+    reverse(nums, 0, k - 1);        // Reverse the first k elements
+    reverse(nums, k, numsSize - 1); // Reverse the remaining (numsSize - k) elements
+}
+
 int main()
 {
-    int arr[6] = {1, 2, 3, 4, 5, 6};
-    rotateArrD(arr, 2, 6);
-    for (int i = 0; i < 6; i++)
+    int arr[] = {1, 2, 3, 4, 5, 6, 7};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 3;
+
+    rotate(arr, n, k);
+
+    for (int i = 0; i < n; i++)
     {
-        cout << arr[i] << endl;
+        cout << arr[i] << " ";
     }
+
     return 0;
 }
