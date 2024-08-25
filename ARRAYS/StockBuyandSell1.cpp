@@ -34,7 +34,7 @@ int maxProfit(int price[], int start, int end)
 
 int main()
 {
-    int price[] = {10,20,30};
+    int price[] = {1,5,4,3,8,12};
     int n = sizeof(price) / sizeof(price[0]);
 
     // Call the maxProfit function
